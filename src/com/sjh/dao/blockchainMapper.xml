@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.sjh.dao.blockchainMapper" >
+  <resultMap id="BaseResultMap" type="com.sjh.entity.blockchain" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="productName" property="productname" jdbcType="VARCHAR" />
+    <result column="modelNumber" property="modelnumber" jdbcType="VARCHAR" />
+    <result column="specifications" property="specifications" jdbcType="VARCHAR" />
+    <result column="inspector" property="inspector" jdbcType="VARCHAR" />
+    <result column="productionTime" property="productiontime" jdbcType="VARCHAR" />
+    <result column="enclosure" property="enclosure" jdbcType="VARCHAR" />
+    <result column="thisNumber" property="thisnumber" jdbcType="VARCHAR" />
+    <result column="blcKey" property="blckey" jdbcType="VARCHAR" />
+    <result column="counter" property="counter" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, productName, modelNumber, specifications, inspector, productionTime, enclosure, 
+    thisNumber, blcKey, counter
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from blockchain_bcx
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from blockchain_bcx
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.sjh.entity.blockchain" >
+    insert into blockchain_bcx (id, productName, modelNumber, 
+      specifications, inspector, productionTime, 
+      enclosure, thisNumber, blcKey, 
+      counter)
+    values (#{id,jdbcType=INTEGER}, #{productname,jdbcType=VARCHAR}, #{modelnumber,jdbcType=VARCHAR}, 
+      #{specifications,jdbcType=VARCHAR}, #{inspector,jdbcType=VARCHAR}, #{productiontime,jdbcType=VARCHAR}, 
+      #{enclosure,jdbcType=VARCHAR}, #{thisnumber,jdbcType=VARCHAR}, #{blckey,jdbcType=VARCHAR}, 
+      #{counter,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.sjh.entity.blockchain" >
+    insert into blockchain_bcx
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="productname != null" >
+        productName,
+      </if>
+      <if test="modelnumber != null" >
+        modelNumber,
+      </if>
+      <if test="specifications != null" >
+        specifications,
+      </if>
+      <if test="inspector != null" >
+        inspector,
+      </if>
+      <if test="productiontime != null" >
+        productionTime,
+      </if>
+      <if test="enclosure != null" >
+        enclosure,
+      </if>
+      <if test="thisnumber != null" >
+        thisNumber,
+      </if>
+      <if test="blckey != null" >
+        blcKey,
+      </if>
+      <if test="counter != null" >
+        counter,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="productname != null" >
+        #{productname,jdbcType=VARCHAR},
+      </if>
+      <if test="modelnumber != null" >
+        #{modelnumber,jdbcType=VARCHAR},
+      </if>
+      <if test="specifications != null" >
+        #{specifications,jdbcType=VARCHAR},
+      </if>
+      <if test="inspector != null" >
+        #{inspector,jdbcType=VARCHAR},
+      </if>
+      <if test="productiontime != null" >
+        #{productiontime,jdbcType=VARCHAR},
+      </if>
+      <if test="enclosure != null" >
+        #{enclosure,jdbcType=VARCHAR},
+      </if>
+      <if test="thisnumber != null" >
+        #{thisnumber,jdbcType=VARCHAR},
+      </if>
+      <if test="blckey != null" >
+        #{blckey,jdbcType=VARCHAR},
+      </if>
+      <if test="counter != null" >
+        #{counter,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.sjh.entity.blockchain" >
+    update blockchain_bcx
+    <set >
+      <if test="productname != null" >
+        productName = #{productname,jdbcType=VARCHAR},
+      </if>
+      <if test="modelnumber != null" >
+        modelNumber = #{modelnumber,jdbcType=VARCHAR},
+      </if>
+      <if test="specifications != null" >
+        specifications = #{specifications,jdbcType=VARCHAR},
+      </if>
+      <if test="inspector != null" >
+        inspector = #{inspector,jdbcType=VARCHAR},
+      </if>
+      <if test="productiontime != null" >
+        productionTime = #{productiontime,jdbcType=VARCHAR},
+      </if>
+      <if test="enclosure != null" >
+        enclosure = #{enclosure,jdbcType=VARCHAR},
+      </if>
+      <if test="thisnumber != null" >
+        thisNumber = #{thisnumber,jdbcType=VARCHAR},
+      </if>
+      <if test="blckey != null" >
+        blcKey = #{blckey,jdbcType=VARCHAR},
+      </if>
+      <if test="counter != null" >
+        counter = #{counter,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.sjh.entity.blockchain" >
+    update blockchain_bcx
+    set productName = #{productname,jdbcType=VARCHAR},
+      modelNumber = #{modelnumber,jdbcType=VARCHAR},
+      specifications = #{specifications,jdbcType=VARCHAR},
+      inspector = #{inspector,jdbcType=VARCHAR},
+      productionTime = #{productiontime,jdbcType=VARCHAR},
+      enclosure = #{enclosure,jdbcType=VARCHAR},
+      thisNumber = #{thisnumber,jdbcType=VARCHAR},
+      blcKey = #{blckey,jdbcType=VARCHAR},
+      counter = #{counter,jdbcType=VARCHAR}
+       where productName = #{productname,jdbcType=VARCHAR}
+   
+  </update>
+  <select id="getAllbcs" resultType="com.sjh.entity.blockchain">
+		select
+		<include refid="Base_Column_List" />
+		from blockchain_bcx
+	</select>
+</mapper>

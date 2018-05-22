@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.sjh.dao.AirportMapper" >
+  <resultMap id="BaseResultMap" type="com.sjh.entity.Airport" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="airportname" property="airportname" jdbcType="VARCHAR" />
+    <result column="city" property="city" jdbcType="VARCHAR" />
+    <result column="runwaycount" property="runwaycount" jdbcType="INTEGER" />
+    <result column="wordcode3" property="wordcode3" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, airportname, city, runwaycount, wordcode3
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from airport
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from airport
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.sjh.entity.Airport" >
+    insert into airport (id, airportname, city, 
+      runwaycount, wordcode3)
+    values (#{id,jdbcType=INTEGER}, #{airportname,jdbcType=VARCHAR}, #{city,jdbcType=VARCHAR}, 
+      #{runwaycount,jdbcType=INTEGER}, #{wordcode3,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.sjh.entity.Airport" >
+    insert into airport
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="airportname != null" >
+        airportname,
+      </if>
+      <if test="city != null" >
+        city,
+      </if>
+      <if test="runwaycount != null" >
+        runwaycount,
+      </if>
+      <if test="wordcode3 != null" >
+        wordcode3,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="airportname != null" >
+        #{airportname,jdbcType=VARCHAR},
+      </if>
+      <if test="city != null" >
+        #{city,jdbcType=VARCHAR},
+      </if>
+      <if test="runwaycount != null" >
+        #{runwaycount,jdbcType=INTEGER},
+      </if>
+      <if test="wordcode3 != null" >
+        #{wordcode3,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.sjh.entity.Airport" >
+    update airport
+    <set >
+      <if test="airportname != null" >
+        airportname = #{airportname,jdbcType=VARCHAR},
+      </if>
+      <if test="city != null" >
+        city = #{city,jdbcType=VARCHAR},
+      </if>
+      <if test="runwaycount != null" >
+        runwaycount = #{runwaycount,jdbcType=INTEGER},
+      </if>
+      <if test="wordcode3 != null" >
+        wordcode3 = #{wordcode3,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.sjh.entity.Airport" >
+    update airport
+    set airportname = #{airportname,jdbcType=VARCHAR},
+      city = #{city,jdbcType=VARCHAR},
+      runwaycount = #{runwaycount,jdbcType=INTEGER},
+      wordcode3 = #{wordcode3,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <select id="getAllAirports" resultType="com.sjh.entity.Airport">
+		select
+		<include refid="Base_Column_List" />
+		from airport
+	</select>
+</mapper>

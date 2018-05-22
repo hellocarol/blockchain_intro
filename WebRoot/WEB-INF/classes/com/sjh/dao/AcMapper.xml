@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.sjh.dao.AcMapper" >
+  <resultMap id="BaseResultMap" type="com.sjh.entity.Ac" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="ACtail" property="actail" jdbcType="VARCHAR" />
+    <result column="ACtype" property="actype" jdbcType="VARCHAR" />
+    <result column="airline" property="airline" jdbcType="VARCHAR" />
+    <result column="ACnum" property="acnum" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, ACtail, ACtype, airline, ACnum
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from ac
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from ac
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.sjh.entity.Ac" >
+    insert into ac (id, ACtail, ACtype, 
+      airline, ACnum)
+    values (#{id,jdbcType=INTEGER}, #{actail,jdbcType=VARCHAR}, #{actype,jdbcType=VARCHAR}, 
+      #{airline,jdbcType=VARCHAR}, #{acnum,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.sjh.entity.Ac" >
+    insert into ac
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="actail != null" >
+        ACtail,
+      </if>
+      <if test="actype != null" >
+        ACtype,
+      </if>
+      <if test="airline != null" >
+        airline,
+      </if>
+      <if test="acnum != null" >
+        ACnum,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="actail != null" >
+        #{actail,jdbcType=VARCHAR},
+      </if>
+      <if test="actype != null" >
+        #{actype,jdbcType=VARCHAR},
+      </if>
+      <if test="airline != null" >
+        #{airline,jdbcType=VARCHAR},
+      </if>
+      <if test="acnum != null" >
+        #{acnum,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.sjh.entity.Ac" >
+    update ac
+    <set >
+      <if test="actail != null" >
+        ACtail = #{actail,jdbcType=VARCHAR},
+      </if>
+      <if test="actype != null" >
+        ACtype = #{actype,jdbcType=VARCHAR},
+      </if>
+      <if test="airline != null" >
+        airline = #{airline,jdbcType=VARCHAR},
+      </if>
+      <if test="acnum != null" >
+        ACnum = #{acnum,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.sjh.entity.Ac" >
+    update ac
+    set ACtail = #{actail,jdbcType=VARCHAR},
+      ACtype = #{actype,jdbcType=VARCHAR},
+      airline = #{airline,jdbcType=VARCHAR},
+      ACnum = #{acnum,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <select id="getAllacs" resultType="com.sjh.entity.Ac">
+		select
+		<include refid="Base_Column_List" />
+		from ac
+	</select>
+</mapper>

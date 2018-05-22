@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sjh.dao.FlightMapper">
+  <resultMap id="BaseResultMap" type="com.sjh.entity.Flight">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="flightnum" jdbcType="VARCHAR" property="flightnum" />
+    <result column="takeoff" jdbcType="INTEGER" property="takeoff" />
+    <result column="landing" jdbcType="INTEGER" property="landing" />
+    <result column="ACtail2" jdbcType="VARCHAR" property="actail2" />
+    <result column="ACtype" jdbcType="VARCHAR" property="actype" />
+    <result column="flightdate" jdbcType="TIMESTAMP" property="flightdate" />
+    <result column="price" jdbcType="REAL" property="price" />
+    <result column="state" jdbcType="VARCHAR" property="state" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, flightnum, takeoff, landing, ACtail2, ACtype, flightdate, price, state
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from flight
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from flight
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.sjh.entity.Flight">
+    insert into flight (id, flightnum, takeoff, 
+      landing, ACtail2, ACtype, 
+      flightdate, price, state
+      )
+    values (#{id,jdbcType=INTEGER}, #{flightnum,jdbcType=VARCHAR}, #{takeoff,jdbcType=INTEGER}, 
+      #{landing,jdbcType=INTEGER}, #{actail2,jdbcType=VARCHAR}, #{actype,jdbcType=VARCHAR}, 
+      #{flightdate,jdbcType=TIMESTAMP}, #{price,jdbcType=REAL}, #{state,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.sjh.entity.Flight">
+    insert into flight
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="flightnum != null">
+        flightnum,
+      </if>
+      <if test="takeoff != null">
+        takeoff,
+      </if>
+      <if test="landing != null">
+        landing,
+      </if>
+      <if test="actail2 != null">
+        ACtail2,
+      </if>
+      <if test="actype != null">
+        ACtype,
+      </if>
+      <if test="flightdate != null">
+        flightdate,
+      </if>
+      <if test="price != null">
+        price,
+      </if>
+      <if test="state != null">
+        state,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="flightnum != null">
+        #{flightnum,jdbcType=VARCHAR},
+      </if>
+      <if test="takeoff != null">
+        #{takeoff,jdbcType=INTEGER},
+      </if>
+      <if test="landing != null">
+        #{landing,jdbcType=INTEGER},
+      </if>
+      <if test="actail2 != null">
+        #{actail2,jdbcType=VARCHAR},
+      </if>
+      <if test="actype != null">
+        #{actype,jdbcType=VARCHAR},
+      </if>
+      <if test="flightdate != null">
+        #{flightdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="price != null">
+        #{price,jdbcType=REAL},
+      </if>
+      <if test="state != null">
+        #{state,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.sjh.entity.Flight">
+    update flight
+    <set>
+      <if test="flightnum != null">
+        flightnum = #{flightnum,jdbcType=VARCHAR},
+      </if>
+      <if test="takeoff != null">
+        takeoff = #{takeoff,jdbcType=INTEGER},
+      </if>
+      <if test="landing != null">
+        landing = #{landing,jdbcType=INTEGER},
+      </if>
+      <if test="actail2 != null">
+        ACtail2 = #{actail2,jdbcType=VARCHAR},
+      </if>
+      <if test="actype != null">
+        ACtype = #{actype,jdbcType=VARCHAR},
+      </if>
+      <if test="flightdate != null">
+        flightdate = #{flightdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="price != null">
+        price = #{price,jdbcType=REAL},
+      </if>
+      <if test="state != null">
+        state = #{state,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.sjh.entity.Flight">
+    update flight
+    set flightnum = #{flightnum,jdbcType=VARCHAR},
+      takeoff = #{takeoff,jdbcType=INTEGER},
+      landing = #{landing,jdbcType=INTEGER},
+      ACtail2 = #{actail2,jdbcType=VARCHAR},
+      ACtype = #{actype,jdbcType=VARCHAR},
+      flightdate = #{flightdate,jdbcType=TIMESTAMP},
+      price = #{price,jdbcType=REAL},
+      state = #{state,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+ 
+  <select id="getAllFlight" resultType="com.sjh.entity.Flight">
+		select
+		<include refid="Base_Column_List" />
+		from flight
+	</select>
+</mapper>
